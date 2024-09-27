@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Language Detection</title>
+    <script>
+        async function detectLanguage() {
+    const inputText = document.getElementById("textInput").value;
+
+    const response = await fetch("http://127.0.0.1:5000/detect_language", {  // Full URL here
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ text: inputText })
+    });
+
+    const result = await response.json();
+    document.getElementById("output").innerText = "Detected Language: " + result.language;
+}
+
+    </script>
+</head>
+<body>
+    <h1>Automatic Language Detection</h1>
+
+    <label for="textInput">Enter Text:</label>
+    <textarea id="textInput" rows="5" cols="50"></textarea><br><br>
+
+    <button onclick="detectLanguage()">Detect Language</button>
+
+    <h3 id="output"></h3>
+</body>
+</html>
